@@ -8,7 +8,9 @@
 
 需要确保电脑上有`python3`, 以及`pyautogui`模块.
 
-> pip3 install pyautogui
+```
+sudo apt install python3-tk python3-dev -y && pip3 install pyautogui
+```
 
 下载并执行程序:
 
