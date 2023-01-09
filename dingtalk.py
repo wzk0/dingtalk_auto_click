@@ -41,8 +41,8 @@ def if_is_right_color(x, y, goal):
 
 # 主函数, 通过传入休眠时间, 接听按钮, 关闭摄像头按钮, 关闭麦克风按钮的位置信息执行相关操作
 def main(sleep_time, final_x, final_y, camera_x, camera_y, microphone_x, microphone_y):
+    print('已启动!')
     while True:
-        print('已启动!')
         # 此列表用于收集来自if_is_right_color函数的判断, 如果此列表元素全部为True, 则会执行点击等操作
         pass_list = []
         for rgb in rgb_white:
