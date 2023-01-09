@@ -39,8 +39,8 @@ def if_is_right_color(x, y, goal):
     # 可以在此定义新的颜色, 只需按上面的格式编写即可
 
 
-# 主函数, 通过传入休眠时间, 接听按钮, 关闭摄像头按钮, 关闭麦克风按钮的位置信息执行相关操作
-def main(sleep_time, final_x, final_y, camera_x, camera_y, microphone_x, microphone_y):
+# 主函数, 通过传入休眠时间, 接听按钮, 关闭摄像头按钮, 关闭麦克风按钮的位置信息, 以及进入视频会议后执行的函数参数执行相关操作
+def main(sleep_time, final_x, final_y, camera_x, camera_y, microphone_x, microphone_y,after_class):
     print('已启动!')
     while True:
         # 此列表用于收集来自if_is_right_color函数的判断, 如果此列表元素全部为True, 则会执行点击等操作
@@ -56,7 +56,7 @@ def main(sleep_time, final_x, final_y, camera_x, camera_y, microphone_x, microph
         if False in pass_list:
             time.sleep(sleep_time)
         else:
-            print("上课了!!!")
+            print("视频会议开始了!!!")
             gui.moveTo(final_x, final_y)
             gui.click()
             # 休眠这一秒钟是必要的, 需要等待整个视频会议界面加载出来
@@ -65,6 +65,7 @@ def main(sleep_time, final_x, final_y, camera_x, camera_y, microphone_x, microph
             gui.click()
             gui.moveTo(microphone_x, microphone_y)
             gui.click()
+            after_class()
 
 
 # 此函数用于更方便的收集符合目标颜色的位置信息
@@ -74,8 +75,12 @@ def picker(color):
     if if_is_right_color(x, y, color):
         print("[%s, %s]" % (x, y))
 
+# 空函数, 可以修改函数内容, 将会在进入视频会议后执行此函数
+def empty_func():
+    pass
+
 try:
-    main(5, 1138, 716, 707, 872, 620, 870)
+    main(5, 1138, 716, 707, 872, 620, 870, empty_func)
 except KeyboardInterrupt:
     print('已退出!')
     [system('rm %s'%photo) for photo in listdir('.') if photo.startswith('.screenshot')]
