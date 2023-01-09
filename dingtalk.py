@@ -1,5 +1,6 @@
 import pyautogui as gui
 import time
+from os import listdir,system
 
 # 可以在此按照嵌套列表的格式储存新的位置数据, 当前数据只适应1920*1080的屏幕
 rgb_white = [[1137, 714], [779, 711], [789, 715], [1152, 716]]
@@ -41,6 +42,7 @@ def if_is_right_color(x, y, goal):
 # 主函数, 通过传入休眠时间, 接听按钮, 关闭摄像头按钮, 关闭麦克风按钮的位置信息执行相关操作
 def main(sleep_time, final_x, final_y, camera_x, camera_y, microphone_x, microphone_y):
     while True:
+        print('已启动!')
         # 此列表用于收集来自if_is_right_color函数的判断, 如果此列表元素全部为True, 则会执行点击等操作
         pass_list = []
         for rgb in rgb_white:
@@ -72,8 +74,11 @@ def picker(color):
     if if_is_right_color(x, y, color):
         print("[%s, %s]" % (x, y))
 
-
-main(5, 1138, 716, 707, 872, 620, 870)
+try:
+    main(5, 1138, 716, 707, 872, 620, 870)
+except KeyboardInterrupt:
+    print('已退出!')
+    [system('rm %s'%photo) for photo in listdir('.') if photo.startswith('.screenshot')]
 
 # while True:
 #    picker("black")
